@@ -5,6 +5,7 @@ import (
 	"html/template"
 	"net/http"
 
+	"fem.com/go/museum/api"
 	"fem.com/go/museum/data"
 )
 
@@ -28,6 +29,8 @@ func main() {
 	server := http.NewServeMux()
 	server.HandleFunc("/hello", handleHello)
 	server.HandleFunc("/template", handleTemplate)
+	server.HandleFunc("/api/exhibitions", api.Get)
+	server.HandleFunc("/api/exhibitions/new", api.Post)
 
 	fs := http.FileServer(http.Dir("./public"))
 	server.Handle("/", fs)
